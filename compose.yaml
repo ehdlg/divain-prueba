@@ -1,0 +1,12 @@
+services:
+  api:
+    container_name: divain_api
+    build:
+      context: .
+      dockerfile: ./docker/api/Dockerfile
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./api:/app
+    environment:
+      - ENV=development
