@@ -10,6 +10,7 @@ services:
       - ./api:/app
     environment:
       - ENV=development
+
   db:
     container_name: divain_db
     image: postgres:${POSTGRES_TAG:-latest}
@@ -28,6 +29,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+
   frontend:
     container_name: divain_frontend
     build:
