@@ -1,10 +1,11 @@
 import useGetProducts from '../hooks/useGetProducts';
 import Product from '../components/Product';
+import Loading from '../components/Loading';
 
 function Home() {
   const { products, isLoading, error } = useGetProducts();
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loading />;
 
   if (error) return <h1>Error: {error}</h1>;
   return (
