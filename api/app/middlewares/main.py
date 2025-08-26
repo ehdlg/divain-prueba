@@ -16,8 +16,11 @@ async def get_stock_movements_repository(session: Session = Depends(get_session)
 
 async def get_product_service(
     product_repository: ProductRepository = Depends(get_product_repository),
+    stock_movement_repository: StockMovementRepository = Depends(
+        get_stock_movements_repository
+    ),
 ):
-    return ProductService(product_repository)
+    return ProductService(product_repository, stock_movement_repository)
 
 
 async def get_stock_movement_service(
