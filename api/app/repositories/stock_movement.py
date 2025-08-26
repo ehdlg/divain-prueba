@@ -8,9 +8,8 @@ class StockMovementRepository:
 
     def create(self, stock_movement: StockMovement):
         self.session.add(stock_movement)
-        self.session.commit()
 
-        self.session.refresh()
+        self.session.commit()
 
         return stock_movement
 
