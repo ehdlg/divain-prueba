@@ -14,7 +14,7 @@ if not DATABASE_URL:
     sys.exit(1)
 
 try:
-    engine = create_engine(DATABASE_URL, echo=True)
+    engine = create_engine(DATABASE_URL, echo=False)
 except Exception as e:
     print(f"Failed to create engine: {e}")
 

@@ -7,6 +7,7 @@ def create_db_and_tables():
     try:
         engine.echo = False
 
+        SQLModel.metadata.drop_all(engine)
         SQLModel.metadata.create_all(engine)
 
         print("Tables created successfully.")
