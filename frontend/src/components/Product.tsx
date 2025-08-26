@@ -53,7 +53,7 @@ export default function Product({ product }: { product: Product }) {
   const decreaseStock = () => setStock((prev) => (prev > 0 ? prev - 1 : 0));
 
   return (
-    <div className='bg-slate-700 border border-slate-600 rounded-xl shadow-md hover:shadow-sm transition-shadow p-6 w-full max-w-3xl mx-auto'>
+    <div className='bg-slate-700 border border-slate-600 rounded-xl shadow-md hover:shadow-sm transition-shadow p-6 w-full max-w-full mx-auto'>
       <div className='space-y-2 flex flex-col gap-4'>
         <div className='text-3xl font-semibold text-white'>{product.sku}</div>
 
