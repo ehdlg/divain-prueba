@@ -2,7 +2,7 @@ import os
 import sys
 
 from dotenv import load_dotenv
-from sqlmodel import create_engine
+from sqlmodel import Session, create_engine
 
 load_dotenv()
 
@@ -19,3 +19,12 @@ except Exception as e:
     print(f"Failed to create engine: {e}")
 
     sys.exit(1)
+
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+
+def get_session_instance():
+    return Session(engine)
