@@ -10,3 +10,24 @@ services:
       - ./api:/app
     environment:
       - ENV=development
+  db:
+    container_name: divain_db
+    image: postgres:${POSTGRES_TAG:-latest}
+    restart: always
+    environment:
+      POSTGRES_USER: divain_user
+      POSTGRES_PASSWORD: divain_pass
+      POSTGRES_DB: divain_db
+    ports:
+      - '5433:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U divain_user']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  db_data: {}
