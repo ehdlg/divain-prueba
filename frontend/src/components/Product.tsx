@@ -1,6 +1,7 @@
 import { type Product } from '../types';
 import { useCallback, useState } from 'react';
 import { apiUrl as API_URL } from '../constants';
+import { toast } from 'sonner';
 
 function StockButton({
   onClick,
@@ -38,10 +39,15 @@ export default function Product({ product }: { product: Product }) {
       },
     });
 
-    if (response.ok) {
-      setOriginalStock(stock); // Update local "original" stock after success
+    if (!response.ok) {
+      toast.error('El stock no pudo ser actualizado');
+
+      return;
     }
-  }, [stock, product.id]);
+    setOriginalStock(stock);
+
+    toast.success(`Stock para ${product.sku} actualizado a ${stock}`);
+  }, [stock, product]);
 
   const increaseStock = () => setStock((prev) => prev + 1);
   const decreaseStock = () => setStock((prev) => (prev > 0 ? prev - 1 : 0));
