@@ -1,4 +1,4 @@
-from app.middlewares.main import ProductRepository, get_product_repository
+from app.middlewares.main import ProductService, get_product_service
 from fastapi import APIRouter, Depends
 
 router = APIRouter()
@@ -6,8 +6,8 @@ router = APIRouter()
 
 @router.get("")
 async def get_products(
-    product_repo: ProductRepository = Depends(get_product_repository),
+    product_service: ProductService = Depends(get_product_service),
 ):
-    products = product_repo.get_all()
+    products = product_service.get_all()
 
     return products
