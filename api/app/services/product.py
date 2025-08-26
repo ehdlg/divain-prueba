@@ -16,7 +16,11 @@ class ProductService:
         self.stock_repository = stock_movement_repository
 
     def get_all(self):
-        return self.product_repository.get_all()
+        products = self.product_repository.get_all()
+
+        products = sorted(products, key=lambda p: p.sku)
+
+        return products
 
     def get_one(self, id: UUID):
         return self.product_repository.get_one(id)
