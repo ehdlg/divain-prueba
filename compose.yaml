@@ -23,11 +23,22 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U divain_user']
+      test: ['CMD-SHELL', 'pg_isready -U divain_user -d divain_db']
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 5s
+  frontend:
+    container_name: divain_frontend
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    ports:
+      - '5174:5173'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    restart: unless-stopped
 
 volumes:
   db_data: {}
