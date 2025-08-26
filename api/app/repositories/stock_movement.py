@@ -13,7 +13,7 @@ class StockMovementRepository:
 
         return stock_movement
 
-    def get_all(self):
+    def get_all(self) -> list[StockMovement]:
         statement = select(StockMovement)
 
         stock_movements = self.session.exec(statement).all()

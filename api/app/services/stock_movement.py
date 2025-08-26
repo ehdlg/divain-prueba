@@ -8,7 +8,19 @@ class StockMovementService:
         self.repository = stock_movement_repo
 
     def get_all(self):
-        return self.repository.get_all()
+        stock_moves = self.repository.get_all()
+
+        stock_moves = [
+            {
+                **move.model_dump(mode="json"),
+                "sku": move.product.sku,
+                "ean13": move.product.ean13,
+                "stock": move.product.stock,
+            }
+            for move in stock_moves
+        ]
+
+        return stock_moves
 
     def create(self, data: dict):
         try:
