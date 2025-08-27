@@ -1,12 +1,7 @@
-import os
 import sys
 
-from dotenv import load_dotenv
+from app.config import DATABASE_URL
 from sqlmodel import Session, create_engine
-
-load_dotenv()
-
-DATABASE_URL = os.getenv("DATABASE_URL", "")
 
 if not DATABASE_URL:
     print("Error: DATABASE_URL not set.")

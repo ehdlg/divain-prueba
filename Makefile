@@ -25,7 +25,9 @@ down: ## Stop Docker containers
 .PHONY: setup_db
 setup_db: ## Setup the database tables
 	$(DC) up -d $(API_SERVICE) $(DB_SERVICE)
-	$(DC) exec -T $(API_SERVICE) python -m app.db.setup
+	$(DC) exec -it $(API_SERVICE) python -m app.db.setup
+	$(DC) exec -it api sh -c "ENV=TEST python -m app.db.setup"
+
 
 .PHONY: populate_db
 populate_db: ## Populate the database with test data
