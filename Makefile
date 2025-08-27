@@ -40,3 +40,7 @@ setup: setup_db populate_db ## Setup the database and populate it
 .PHONY: init
 init: start up setup ## Build Docker images and initialize DB with test data
 	@echo "✅ Project initialized."
+
+.PHONY: test_api
+test_api: ## Run the test suite for the API
+	$(DC) exec -it api sh -c "ENV=TEST python -m pytest"
