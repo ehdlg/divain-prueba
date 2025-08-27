@@ -7,7 +7,7 @@ export default function useGetStockMovements() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const getProducts = useCallback(async () => {
+  const getStockMovements = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/stock`);
 
@@ -16,6 +16,8 @@ export default function useGetStockMovements() {
       }
 
       const data = (await response.json()) as StockMovement[];
+
+      data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
 
       setStockMovements(data);
     } catch (error) {
@@ -32,8 +34,8 @@ export default function useGetStockMovements() {
   }, []);
 
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    getStockMovements();
+  }, [getStockMovements]);
 
   return {
     stockMovements,
