@@ -1,5 +1,24 @@
 # Prueba de código Divain
 
+Este proyecto es una prueba de código para Divain, cuyo objetivo es integrar una **API** con una base de datos **PostgreSQL** y consumir los datos desde un **frontend**.
+
+## API
+
+La API está desarrollada con **FastAPI** y expone los siguientes endpoints:
+
+- `GET /products`: Lista todos los productos con **SKU**, **EAN13** y **stock**.
+- `PATCH /products/{id}`: Actualiza un producto, utilizado principalmente para modificar el **stock**.
+- `GET /stock`: Lista los movimientos de **stock** realizados.
+
+El objetivo principal era crear una base de datos en **PostgreSQL**, desarrollar la **API** para proveer datos al frontend y permitir la actualización de los productos.
+
+## Frontend
+
+El frontend está construido con **React**. Contiene dos páginas principales:
+
+- `/`: Lista los productos con **SKU**, **EAN13** y **stock**, y permite modificar la cantidad en stock.
+- `/stock`: Muestra un historial de los movimientos de stock.
+
 ---
 
 ## Requisitos
@@ -52,6 +71,7 @@ make down
 | `make populate_db` | Inserta datos de prueba en la base de datos        |
 | `make setup`       | Ejecuta `setup_db` y `populate_db`                 |
 | `make init`        | Ejecuta `start`, `up` y `setup` para preparar todo |
+| `make test-api`    | Ejecuta los tests de la API                        |
 
 ---
 
@@ -75,7 +95,21 @@ docker compose exec -T api python -m app.db.populate_db
 
 ---
 
-## Puertos usados
+## Tests
 
-- API: [http://localhost:8080](http://localhost:8080)
+Para ejecutar los tests de la API, ejecuta el siguiente comando:
+
+```bash
+make test_api
+```
+
+En caso de no usar Make:
+
+```bash
+docker compose exec -it api sh -c "ENV=TEST python -m pytest"
+```
+
+## URLs de la Aplicación
+
 - Frontend: [http://localhost:5174](http://localhost:5174)
+- API: [http://localhost:8080](http://localhost:8080)
